@@ -1,0 +1,239 @@
+============CREATE Database======
+CREATE DATABASE SHAH;
+
+test               |
+| testDB 
+
+=====================SQL - DROP or DELETE Database=======
+
+DROP DATABASE SHAH;
+
+| mysql              |
+| orig               |
+| test               |
++--------------------+
+
+=============SQL - SELECT Database, USE Statement===========
+
+When you have multiple databases in your SQL Schema, then before starting your operation, you would need to select a database where all the operations would be performed
+The SQL USE statement is used to select any existing database in the SQL schema.
+
+===
+SHOW DATABASE;
+====
+USE DATABASE SHAH;
+
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| AMROOD             |
+
+
+===============The SQL CREATE TABLE Statement=======
+
+Syntax :
+
+CREATE TABLE table_name (
+    column1 datatype,
+    column2 datatype,
+    column3 datatype,
+);
+
+
+CREATE TABLE CUSTOMERS (
+ID  INIT NOT NULL,
+NAME VARCHAR (20) NOT NULL,
+AGE INT NOT NULL,
+ADRESS CHAR (25),
+SALARY DECIMAL(18,2) ,
+PRIMARY KEY (ID)
+);
+
+========SQL INSERT INTO Statement========
+
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+INSERT INTO Customers (CustomerName, City, Country)
+VALUES ('shahnawz', 'karachi', 'pakistan');
+
+==============The SQL SELECT Statement=========
+SELECT column1, column2, ...
+FROM table_name;
+
+select CustomerName , City from Customers;
+
+CustomerName			City
+Alfreds Futterkiste			Berlin
+Ana Trujillo Emparedados y helados	México D.F.
+
+
+select * from Customers;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1		Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+
+==================SQL SELECT DISTINCT Statement==========
+The SELECT DISTINCT statement is used to return only distinct (different) values.
+
+Inside a table, a column often contains many duplicate values; and sometimes you only want to list the different (distinct) values.
+
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+
+SELECT COUNT(DISTINCT Country) FROM Customers;
+
+umber of Records: 1
+COUNT(DISTINCT Country)
+22
+
+===========SQL WHERE Clause==========
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+===========WHERE Clause==========
+
+select * from Customers where Country='Mexico';
+
+SELECT * FROM Customers
+WHERE CustomerID=1;
+
+Operator	Description
+=	Equal
+<>	Not equal. Note: In some versions of SQL this operator may be written as !=
+>	Greater than
+<	Less than
+>=	Greater than or equal
+<=	Less than or equal
+BETWEEN	Between an inclusive range
+LIKE	Search for a pattern
+IN	To specify multiple possible values for a column
+====================SQL AND, OR and NOT Operators========
+
+he SQL AND, OR and NOT Operators
+The WHERE clause can be combined with AND, OR, and NOT operators.
+
+1) AND Syntax	
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...;
+
+
+
+2)  OR Syntax
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...;
+
+3) NOT Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+
+SELECT * FROM Customers
+WHERE NOT Country='Germany';
+
+============
+select * from Customers where Country='Germany' AND City='Berlin';
+
+
+============
+SELECT * FROM Customers
+WHERE City='Berlin' OR City='München';
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+25	Frankenversand	Peter Franken	Berliner Platz 43	München	80805	Germany
+
+=====================Combining AND, OR and NOT===========
+
+ou can also combine the AND, OR and NOT operators.
+
+The following SQL statement selects all fields from "Customers" where country is "Germany" AND city must be "Berlin" OR "München" (use parenthesis to form complex expressions):
+
+SELECT * FROM Customers
+WHERE Country='Germany' AND (City='Berlin' OR City='München');
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+25	Frankenversand	Peter Franken	Berliner Platz 43	München	80805	Germany
+
+==============The SQL ORDER BY Keyword=============
+The ORDER BY keyword is used to sort the result-set in ascending or descending order.
+
+The ORDER BY keyword sorts the records in ascending order by default. To sort the records in descending order, use the DESC keyword.
+
+
+ORDER BY Syntax
+SELECT column1, column2, ...
+FROM table_name
+ORDER BY column1, column2, ... ASC|DESC;
+
+select *from Customers order by Country;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+94	shah	null	null	null	null	null
+12	Cactus Comidas para llevar	Patricio Simpson	Cerrito 333	Buenos Aires	1010	Argentina
+54	Océano Atlántico Ltda.	Yvonne Moncada	Ing. Gustavo Moncada 8585 Piso 20-A	Buenos Aires	1010	Argentina
+
+=============ORDER BY DESC ==============
+
+SELECT * FROM Customers
+ORDER BY Country DESC;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+95	shahnawz	null	null	karachi	null	pakistan
+
+================ORDER BY Several Columns============
+SELECT * FROM Customers
+ORDER BY Country, CustomerName;
+
+============= ORDER BY Several Columns=========
+
+SELECT * FROM Customers
+ORDER BY Country ASC, CustomerName DESC;
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+94	shah	null	null	null	null	null
+64	Rancho grande	Sergio Gutiérrez	Av. del Libertador 900	Buenos Aires	1010	Argentina
+
+==============
+
+table customers;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+
+table Categories;
+CategoryID	CategoryName	Description
+
+table Employees;
+
+EmployeeID	LastName  	FirstName	    BirthDate	Photo	Notes
+
+table OrderDetails;
+
+OrderDetailID	OrderID	ProductID	Quantity
+
+table Orders;
+
+OrderID	CustomerID	EmployeeID	  OrderDate	ShipperID
+
+table Products;
+
+ProductID	 ProductName	SupplierID	CategoryID	Unit	Price
+TABLE Shippers;
+
+ShipperID	  ShipperName	Phone
+
+TABLE Suppliers;
+
+SupplierID	SupplierName	ContactName	Address	City	PostalCode	Country	Phone
+
+
+
+

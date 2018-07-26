@@ -1,0 +1,330 @@
+==================Data Type===========
+
+SQL Data Type is an attribute that specifies the type of data of any object. Each column, variable and expression has a related data type in SQL. You can use these data types while creating your tables. You can choose a data type for a table column based on your requirement.
+
+
+======================Exact Numeric Data Types============
+
+
+DATA TYPE	FROM	TO
+bigint      		-9,223,372,036,854,775,808	9,223,372,036,854,775,807
+int		-2,147,483,648	2,147,483,647
+smallint		-32,768	32,767
+tinyint		0	255
+bit		0	1
+decimal		-10^38 +1	10^38 -1
+numeric		-10^38 +1	10^38 -1
+money		-922,337,203,685,477.5808	+922,337,203,685,477.5807
+smallmoney	-214,748.3648	+214,748.3647
+
+==================Approximate Numeric Data Types================
+
+DATA TYPE	FROM	TO
+float	-1.79E + 308	1.79E + 308
+real	-3.40E + 38	3.40E + 38
+
+
+====================Date and Time Data Types==========
+
+DATA TYPE	FROM	TO
+datetime		Jan 1, 1753	Dec 31, 9999
+smalldatetime	Jan 1, 1900	Jun 6, 2079
+date		Stores a date like June 30, 1991
+time		Stores a time of day like 12:30 P.M.
+
+=======================Character Strings Data Types============
+
+Sr.No.	DATA TYPE & Description
+1	
+char
+
+Maximum length of 8,000 characters.( Fixed length non-Unicode characters)
+
+2	
+varchar
+
+Maximum of 8,000 characters.(Variable-length non-Unicode data).
+
+3	
+varchar(max)
+
+Maximum length of 2E + 31 characters, Variable-length non-Unicode data (SQL Server 2005 only).
+
+4	
+text
+
+Variable-length non-Unicode data with a maximum length of 2,147,483,647 characters.
+
+Unicode Character Strings Data Types
+
+==============Sr.No.	DATA TYPE & Description=========
+1)	nchar
+
+	Maximum length of 4,000 characters.( Fixed length Unicode)
+
+2)	nvarchar
+
+	Maximum length of 4,000 characters.(Variable length Unicode)
+
+3)	nvarchar(max)
+
+	Maximum length of 2E + 31 characters (SQL Server 2005 only).( Variable length Unicode)
+
+4)	ntext
+
+	Maximum length of 1,073,741,823 characters. ( Variable length Unicode )
+
+=================Binary Data Types===============
+
+
+1)	binary
+
+	Maximum length of 8,000 bytes(Fixed-length binary data )
+
+2)	varbinary
+
+	Maximum length of 8,000 bytes.(Variable length binary data)
+
+3)	varbinary(max)
+
+	Maximum length of 2E + 31 bytes (SQL Server 2005 only). ( Variable length Binary data)
+
+4)	image
+
+Maximum length of 2,147,483,647 bytes. ( Variable length Binary Data)
+
+=================Misc Data Types===========
+
+
+1)	sql_variant
+
+		Stores values of various SQL Server-supported data types, except text, ntext, and timestamp.
+
+2)	timestamp
+
+		Stores a database-wide unique number that gets updated every time a row gets updated
+
+3)	uniqueidentifier
+
+		Stores a globally unique identifier (GUID)
+
+4)	xml
+
+		Stores XML data. You can store xml instances in a column or a variable (SQL Server 2005 only).
+
+5)	cursor
+
+		Reference to a cursor object
+
+6)	table
+
+		Stores a result set for later processing
+
+======================IMPORTANT TOPIC=============
+
+
+Tablename 	Records
+Customers	91
+Categories	8
+Employees	10
+OrderDetails	518
+Orders		196
+Products		77
+Shippers		3
+Suppliers		29
+
+
+===============
+
+SELECT * FROM Customers;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+2	Ana Trujillo Emparedados y helados	Ana Trujillo	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+
+
+================The SQL SELECT DISTINCT Statement==========
+
+SELECT DISTINCT column1, column2, ...
+FROM table_name;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1
+
+Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+
+
+=========
+SELECT Country FROM Customers;
+
+
+Country
+Germany
+Mexico
+Mexico
+UK
+Sweden
+===========
+SELECT DISTINCT Country FROM Customers;
+
+Country
+Germany
+Mexico
+UK
+Sweden
+France
+Spain
+Canada
+=============
+SELECT COUNT(DISTINCT Country) FROM Customers;
+
+COUNT(DISTINCT Country)
+21
+==================
+
+SELECT Count(*) AS DistinctCountries
+FROM (SELECT DISTINCT Country FROM Customers);
+
+DistinctCountries
+21
+
+==================SQL INSERT INTO Statement===========
+
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...);
+
+
+===========Insert Data Only in Specified Columns=======
+
+INSERT INTO Customers (CustomerName, ContactName, Address, City, PostalCode, Country)
+VALUES ('Cardinal','Tom B. Erichsen','Skagen 21','Stavanger','4006','Norway');
+
+==============SQL WHERE Clause==========
+
+The SQL WHERE Clause
+The WHERE clause is used to filter records.
+
+The WHERE clause is used to extract only those records that fulfill a specified condition.
+
+
+WHERE Syntax
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+
+==============WHERE Clause Example=========
+SELECT * FROM Customers
+WHERE Country='Mexico';
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+2	Ana Trujillo Emparedados y helados	Ana Trujillo	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+3	Antonio Moreno Taquería	Antonio Moreno	Mataderos 2312	México D.F.	05023	Mexico
+
+==================Text Fields vs. Numeric Fields===========
+
+SELECT * FROM Customers
+WHERE CustomerID=1;
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+
+
+============================Operators in The WHERE Clause===========
+
+The following operators can be used in the WHERE clause:
+
+Operator	Description
+=	Equal
+<>	Not equal. Note: In some versions of SQL this operator may be written as !=
+>	Greater than
+<	Less than
+>=	Greater than or equal
+<=	Less than or equal
+BETWEEN	Between an inclusive range
+LIKE	Search for a pattern
+IN	To specify multiple possible values for a column
+
+=================SQL AND, OR and NOT Operators=============
+
+
+he WHERE clause can be combined with AND, OR, and NOT operators.
+
+The AND and OR operators are used to filter records based on more than one condition:
+
+The AND operator displays a record if all the conditions separated by AND is TRUE.
+The OR operator displays a record if any of the conditions separated by OR is TRUE.
+The NOT operator displays a record if the condition(s) is NOT TRUE.
+
+=============AND Syntax================
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 AND condition2 AND condition3 ...;
+
+===============OR Syntax============
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition1 OR condition2 OR condition3 ...;
+
+==================NOT Syntax==================
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE NOT condition;
+
+================AND Example============
+
+SELECT * FROM Customers
+WHERE Country='Germany' AND City='Berlin';
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+
+==========OR Example==============
+
+SELECT * FROM Customers
+WHERE City='Berlin' OR City='München';
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+25	Frankenversand	Peter Franken	Berliner Platz 43	München	80805	Germany
+
+=============NOT Example============
+
+SELECT * FROM Customers
+WHERE NOT Country='Germany';
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+2	Ana Trujillo Emparedados y helados	Ana Trujillo	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+3	Antonio Moreno Taquería	Antonio Moreno	Mataderos 2312	México D.F.	05023	Mexico
+
+
+==============Combining AND, OR and NOT==========
+
+SELECT * FROM Customers
+WHERE Country='Germany' AND (City='Berlin' OR City='München');
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+25	Frankenversand	Peter Franken	Berliner Platz 43	München	80805	Germany
+
+===================
+SELECT * FROM Customers
+WHERE NOT Country='Germany' AND NOT Country='USA';
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+2	Ana Trujillo Emparedados y helados	Ana Trujillo	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+3	Antonio Moreno Taquería	Antonio Moreno	Mataderos 2312	México D.F.	05023	Mexico
+4	Around the Horn	Thomas Hardy	120 Hanover Sq.	London	WA1 1DP	UK
+
+
+
+
+
+
+
+
+

@@ -235,5 +235,529 @@ TABLE Suppliers;
 SupplierID	SupplierName	ContactName	Address	City	PostalCode	Country	Phone
 
 
+=================UPDATE===========
+UPDATE Customers
+SET ContactName='Alfred Schmidt', City='Frankfurt'
+WHERE CustomerID=1;
+
+====================UPDATE Multiple Records============
+UPDATE Customers
+SET ContactName='Juan'
+WHERE Country='Mexico';
+
+
+=======================SQL DELETE Statement=============
+
+DELETE Syntax
+DELETE FROM table_name
+WHERE condition;
+
+
+DELETE FROM Customers
+WHERE CustomerName='Alfreds Futterkiste';
+
+==============Delete All Records=========
+
+DELETE FROM table_name;
+or:
+
+DELETE * FROM table_name;
+
+===============SQL TOP, LIMIT or ROWNUM Clause=========
+
+
+SELECT TOP number|percent column_name(s)
+FROM table_name
+WHERE condition;
+
+SELECT TOP 3 * FROM Customers;
+
+
+1 	Alfreds Futterkiste 	Maria Anders 	Obere Str. 57 	Berlin 	12209 	Germany 
+2 	Ana Trujillo Emparedados y helados 	Ana Trujillo 	Avda. de la Constitución 2222 	México D.F. 	05021 	Mexico 
+3 	Antonio Moreno Taquería 	Antonio Moreno 	Mataderos 2312 	México D.F. 	05023 	Mexi
+
+
+================SQL TOP, LIMIT and ROWNUM ===========
+
+SELECT TOP 3 * FROM Customers;
+
+1 	Alfreds Futterkiste 	Maria Anders 	Obere Str. 57 	Berlin 	12209 	Germany 
+2 	Ana Trujillo Emparedados y helados 	Ana Trujillo 	Avda. de la Constitución 2222 	México D.F. 	05021 	Mexico 
+3 	Antonio Moreno Taquería 	Antonio Moreno 	Mataderos 2312 	México D.F. 	05023 	Mexico
+
+=============SELECT * FROM Customers LIMIT 3;=========
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Maria Anders	Obere Str. 57	Berlin	12209	Germany
+2	Ana Trujillo Emparedados y helados	Ana Trujillo	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+3	Antonio Moreno Taquería	Antonio Moreno	Mataderos 2312	México D.F.	05023	Mexico
+
+===============================
+SELECT * FROM Customers LIMIT 3;
+
+=====================SELECT TOP 50 PERCENT * FROM Customers;========
+
+=================
+SELECT TOP 3 * FROM Customers
+WHERE Country='Germany';
+
+=================
+SELECT * FROM Customers
+WHERE Country='Germany'
+LIMIT 3;
+
+===============SQL MIN() and MAX() Functions=============
+
+The MIN() function returns the smallest value of the selected column.
+
+The MAX() function returns the largest value of the selected column.
+
+1)	MIX() Syntax
+
+SELECT MIN(column_name)
+FROM table_name
+WHERE condition;
+
+2)	MAX() Syntax
+
+SELECT MAX(column_name)
+FROM table_name
+WHERE condition;
+
+============MINUMUM=============
+SELECT MIN(Price) AS SmallestPrice
+FROM Products; 
+
+SmallestPrice
+2.5
+==========MIXMUM============
+
+SELECT MAX(Price) AS LargestPrice
+FROM Products;
+
+=================SQL COUNT(), AVG() and SUM() Functions================
+
+
+The COUNT() function returns the number of rows that matches a specified criteria.
+
+The AVG() function returns the average value of a numeric column.
+
+The SUM() function returns the total sum of a numeric column.
+
+
+1)	COUNT() Syntax
+
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+
+2)	AVG() Syntax
+
+
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+
+3) SUM() Syntax
+
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+
+============
+
+SELECT COUNT(ProductID)
+FROM Products;
+
+
+COUNT(ProductID)
+77
+
+
+=============
+
+SELECT AVG(Price)
+FROM Products;
+
+
+
+==============
+
+SELECT SUM(Quantity)
+FROM OrderDetails;
+
+
+SUM(Quantity)
+12743
+
+
+=================SQL LIKE Operator============
+
+
+
+The SQL LIKE Operator
+The LIKE operator is used in a WHERE clause to search for a specified pattern in a column.
+
+There are two wildcards used in conjunction with the LIKE operator:
+
+% - The percent sign represents zero, one, or multiple characters
+_ - The underscore represents a single character
+Note: MS Access uses a question mark (?) instead of the underscore (_).
+
+The percent sign and the underscore can also be used in combinations!
+
+
+
+LIKE Syntax
+SELECT column1, column2, ...
+FROM table_name
+WHERE columnN LIKE pattern;
+
+
+======================
+SELECT * FROM Customers
+WHERE CustomerName LIKE 'a%';
+
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Juan	Obere Str. 57	Frankfurt	12209	Germany
+2	Ana Trujillo Emparedados y helados	Juan	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+3	Antonio Moreno Taquería	Juan	Mataderos 2312	México D.F.	05023	Mexico
+4	Around the Horn	Juan	120 Hanover Sq.	London	WA1 1DP	UK
+
+
+===========================
+SELECT * FROM Customers
+WHERE CustomerName LIKE '%a';
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+3	Antonio Moreno Taquería	Juan	Mataderos 2312	México D.F.	05023	Mexico
+13	Centro comercial Moctezuma	Juan	Sierras de Granada 9993	México D.F.	05022	Mexico
+30	Godos Cocina Típica	Juan	C/ Romero, 33	Sevilla	41101	Spain
+61	Que Delícia	Juan	Rua da Panificadora, 12	Rio de Janeiro	02389-673	Brazil
+
+
+=====================SQL Wildcard Characters============
+SQL Wildcard Characters
+
+A wildcard character is used to substitute any other character(s) in a string.
+
+Wildcard characters are used with the SQL LIKE operator. The LIKE operator is used in a WHERE clause to search for a specified pattern in a column. 
+
+There are two wildcards used in conjunction with the LIKE operator:
+
+% - The percent sign represents zero, one, or multiple characters
+_ - The underscore represents a single characte
+
+[charlist] - Defines sets and ranges of characters to match
+[^charlist] or [!charlist] - Defines sets and ranges of characters NOT to match
+
+
+
+
+
+LIKE Operator	Description
+WHERE CustomerName LIKE 'a%'	Finds any values that starts with "a"
+WHERE CustomerName LIKE '%a'	Finds any values that ends with "a"
+WHERE CustomerName LIKE '%or%'	Finds any values that have "or" in any position
+WHERE CustomerName LIKE '_r%'	Finds any values that have "r" in the second position
+WHERE CustomerName LIKE 'a_%_%'	Finds any values that starts with "a" and are at least 3 characters in length
+WHERE ContactName LIKE 'a%o'	Finds any values that starts with "a" and ends with "o"
+
+
+1)   
+
+SELECT * FROM Customers
+WHERE City LIKE 'ber%';
+
+2) 
+SELECT * FROM Customers
+WHERE City LIKE '%es%';
+
+3) 
+
+SELECT * FROM Customers
+WHERE City LIKE '_erlin';
+
+4)
+
+SELECT * FROM Customers
+WHERE City LIKE 'L_n_on';
+
+5)
+SELECT * FROM Customers
+WHERE City LIKE '[bsp]%';
+
+
+6)
+SELECT * FROM Customers
+WHERE City LIKE '[a-c]%';
+
+7)
+SELECT * FROM Customers
+WHERE City LIKE '[!bsp]%';
+
+8)
+
+SELECT * FROM Customers
+WHERE City NOT LIKE '[bsp]%';
+
+==================SQL IN Operator==============
+
+
+The SQL IN Operator
+The IN operator allows you to specify multiple values in a WHERE clause.
+
+The IN operator is a shorthand for multiple OR conditions.
+
+
+1) 	IN Syntax
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (value1, value2, ...);
+or:
+
+SELECT column_name(s)
+FROM table_name
+WHERE column_name IN (SELECT STATEMENT);
+
+
+===================
+SELECT * FROM Customers
+WHERE Country IN ('Germany', 'France', 'UK');
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Juan	Obere Str. 57	Frankfurt	12209	Germany
+4	Around the Horn	Juan	120 Hanover Sq.	London	WA1 1DP	UK
+
+===================
+SELECT * FROM Customers
+WHERE Country NOT IN ('Germany', 'France', 'UK');
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+2	Ana Trujillo Emparedados y helados	Juan	Avda. de la Constitución 2222	México D.F.	05021	Mexico
+3	Antonio Moreno Taquería	Juan	Mataderos 2312	México D.F.	05023	Mexico
+
+
+=====================
+SELECT * FROM Customers
+WHERE Country IN (SELECT Country FROM Suppliers);
+
+
+CustomerID	CustomerName	ContactName	Address	City	PostalCode	Country
+1	Alfreds Futterkiste	Juan	Obere Str. 57	Frankfurt	12209	Germany
+4	Around the Horn	Juan	120 Hanover Sq.	London	WA1 1DP	UK
+
+
+=====================SQL BETWEEN Operator====================
+
+The BETWEEN operator selects values within a given range. The values can be numbers, text, or dates.
+
+The BETWEEN operator is inclusive: begin and end values are included. 
+
+BETWEEN Syntax
+SELECT column_name(s)
+FROM table_name
+WHERE column_name BETWEEN value1 AND value2;
+
+
+ProductID	ProductName	SupplierID	CategoryID	Unit	Price
+1	Chais	1	1	10 boxes x 20 bags	18
+2	Chang	1	1	24 - 12 oz bottles	19
+3	Aniseed Syrup	1	2	12 - 550 ml bottles	10
+4	Chef Anton's Cajun Seasoning	1	2	48 - 6 oz jars	22
+5	Chef Anton's Gumbo Mix	1	2	36 boxes	21.35
+
+
+========================
+1)
+
+SELECT * FROM Products
+WHERE Price BETWEEN 10 AND 20;
+
+ProductID	ProductName	SupplierID	CategoryID	Unit	Price
+1	Chais	1	1	10 boxes x 20 bags	18
+2	Chang	1	1	24 - 12 oz bottles	19
+3	Aniseed Syrup	1	2	12 - 550 ml bottles	10
+
+=================NOT BETWEEN==============
+
+SELECT * FROM Products
+WHERE Price NOT BETWEEN 10 AND 20;
+
+ProductID	ProductName	SupplierID	CategoryID	Unit	Price
+4	Chef Anton's Cajun Seasoning	2	2	48 - 6 oz jars	22
+5	Chef Anton's Gumbo Mix	2	2	36 boxes	21.35
+
+============BETWEEN with IN ===========
+SELECT * FROM Products
+WHERE (Price BETWEEN 10 AND 20)
+AND NOT CategoryID IN (1,2,3);
+
+ProductID	ProductName	SupplierID	CategoryID	Unit	Price
+31	Gorgonzola Telino	14	4	12 - 100 g pkgs	12.5
+36	Inlagd Sill	17	8	24 - 250 g jars	19
+40	Boston Crab Meat	19	8	24 - 4 oz tins	18.4
+42	Singaporean Hokkien Fried Mee	20	5	32 - 1 kg pkgs.	14
+46	Spegesild	21	8	4 - 450 g glasses	12
+57	Ravioli Angelo	26	5	24 - 250 g pkgs.	19.5
+
+=====================
+
+SELECT * FROM Orders
+WHERE OrderDate BETWEEN #07/04/1996# AND #07/09/1996#;
+
+OrderID	CustomerID	EmployeeID	OrderDate	ShipperID
+10248 	90 	5 	7/4/1996 	3 
+10249 	81 	6 	7/5/1996 	1 
+10250 	34 	4 	7/8/1996 	2 
+10251 	84 	3 	7/8/1996 	1 
+10252 	76 	4 	7/9/1996 	2 
+
+==============SQL Aliases===============
+
+
+SQL Aliases
+SQL aliases are used to give a table, or a column in a table, a temporary name.
+
+Aliases are often used to make column names more readable.
+
+An alias only exists for the duration of the query.
+
+1)      Alias Column Syntax:
+
+SELECT column_name AS alias_name
+FROM table_name;
+
+Alias Table Syntax :
+
+SELECT column_name(s)
+FROM table_name AS alias_name;
+
+===================Alias for Columns========
+
+SELECT CustomerID AS ID, CustomerName AS Customer
+FROM Customers;
+
+ID	Customer
+1	Alfreds Futterkiste
+2	Ana Trujillo Emparedados y helados
+3	Antonio Moreno Taquería
+4	Around the Horn
+5	Berglunds snabbköp
+6	Blauer See Delikatessen
+
+
+=====================
+SELECT CustomerName AS Customer, ContactName AS [Contact Person]
+FROM Customers;
+
+
+Customer	Contact Person
+Alfreds Futterkiste	Juan
+Ana Trujillo Emparedados y helados	Juan
+Antonio Moreno Taquería	Juan
+
+
+====================
+SELECT CustomerName, Address + ', ' + PostalCode + ' ' + City + ', ' + Country AS Address
+FROM Customers;
+
+CustomerName	Address
+Alfreds Futterkiste 	Obere Str. 57, 12209 Berlin, Germany 
+Ana Trujillo Emparedados y helados 	Avda. de la Constitución 2222, 05021 México D.F., Mexico 
+Antonio Moreno Taquería 	Mataderos 2312, 05023 México D.F., Mexico
+
+====================SQL Joins==================
+
+
+A JOIN clause is used to combine rows from two or more tables, based on a related column between them.
+
+Let's look at a selection from the "Orders" table:
+
+OrderID	CustomerID	OrderDate
+10308	2	1996-09-18
+10309	37	1996-09-19
+10310	77	1996-09-20
+
+
+
+Then, look at a selection from the "Customers" table:
+
+CustomerID	CustomerName	ContactName	Country
+1	Alfreds Futterkiste	Maria Anders	Germany
+2	Ana Trujillo Emparedados y helados	Ana Trujillo	Mexico
+3	Antonio Moreno Taquería	Antonio Moreno	Mexico
+
+
+================
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers
+ON Orders.CustomerID=Customers.CustomerID;
+
+
+Number of Records: 196
+OrderID	CustomerName	OrderDate
+10248	Wilman Kala	1996-07-04
+10249	Tradição Hipermercados	1996-07-05
+
+====================
+
+Different Types of SQL JOINs
+
+
+(INNER) JOIN: Returns records that have matching values in both tables
+LEFT (OUTER) JOIN: Return all records from the left table, and the matched records from the right table
+RIGHT (OUTER) JOIN: Return all records from the right table, and the matched records from the left table
+FULL (OUTER) JOIN: Return all records when there is a match in either left or right table
+
+
+====================SQL INNER JOIN Keyword================
+
+SQL INNER JOIN Keyword
+The INNER JOIN keyword selects records that have matching values in both tables.
+
+INNER JOIN Syntax
+SELECT column_name(s)
+FROM table1
+INNER JOIN table2 ON table1.column_name = table2.column_name;
+
+==============================================================
+
+SELECT Orders.OrderID, Customers.CustomerName
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID;
+
+OrderID	CustomerName
+10248	Wilman Kala
+10249	Tradição Hipermercados
+10250	Hanari Carnes
+
+=======================JOIN Three Tables=============
+
+
+SELECT Orders.OrderID, Customers.CustomerName, Shippers.ShipperName
+FROM ((Orders
+INNER JOIN Customers ON Orders.CustomerID = Customers.CustomerID)
+INNER JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID);
+
+
+OrderID	CustomerName	ShipperName
+10248	Wilman Kala	Federal Shipping
+10249	Tradição Hipermercados	Speedy Express
+10250	Hanari Carnes	United Package
+
+
+
+
+
+
+
 
 
